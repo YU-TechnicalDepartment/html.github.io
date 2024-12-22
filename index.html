@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTMLコードテスター</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0 20px 20px 20px; 
+        }
+        textarea {
+            width: 100%; 
+            height: 200px;
+            font-size: 18px; 
+            box-sizing: border-box; 
+        }
+        button {
+            background-color: #26A79A;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        button:hover:enabled {
+            background-color: #1e877c;
+        }
+        #reset-button {
+            background-color: #FF6347; 
+        }
+        #reset-button:hover {
+            background-color: #e04d3a;
+        }
+    </style>
+</head>
+<body>
+    <h1>HTMLコードテスター</h1>
+    <textarea id="html-code" placeholder="ここにHTMLコードを入力" oninput="toggleButton()"></textarea>
+    <button id="run-button" onclick="runCode()" disabled>コードを実行</button>
+    <button id="reset-button" onclick="resetCode()">リセット</button>
+    <script>
+        function toggleButton() {
+            const code = document.getElementById('html-code').value;
+            const runButton = document.getElementById('run-button');
+            runButton.disabled = code.trim() === '';
+        }
+
+        function runCode() {
+            const code = document.getElementById('html-code').value;
+            const newTab = window.open('about:blank', '_blank');
+            newTab.document.open();
+            newTab.document.write(code);
+            newTab.document.close();
+        }
+
+        function resetCode() {
+            const textArea = document.getElementById('html-code');
+            const runButton = document.getElementById('run-button');
+            textArea.value = '';
+            runButton.disabled = true;
+        }
+    </script>
+</body>
+</html>

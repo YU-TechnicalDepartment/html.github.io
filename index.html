@@ -46,7 +46,18 @@
     <textarea id="html-code" placeholder="ここにHTMLコードを入力" oninput="toggleButton()"></textarea>
     <button id="run-button" onclick="runCode()" disabled>コードを実行</button>
     <button id="reset-button" onclick="resetCode()">リセット</button>
+
     <script>
+        // URLパラメータから入力値を取得し、テキストエリアにセット
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const defaultValue = urlParams.get('input'); // `input`パラメータを取得
+            if (defaultValue) {
+                document.getElementById('html-code').value = decodeURIComponent(defaultValue);
+                toggleButton(); // ボタンの有効/無効を調整
+            }
+        };
+
         function toggleButton() {
             const code = document.getElementById('html-code').value;
             const runButton = document.getElementById('run-button');
